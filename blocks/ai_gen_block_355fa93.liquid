@@ -1,0 +1,303 @@
+{% doc %}
+  @prompt
+    BLACK FRIDAY SALE: USE CODE TDHDTC FOR 15% OFF
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-black-friday-banner-{{ ai_gen_id }} {
+    background-color: {{ block.settings.background_color }};
+    color: {{ block.settings.text_color }};
+    padding: {{ block.settings.padding_vertical }}px {{ block.settings.padding_horizontal }}px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-black-friday-banner__content-{{ ai_gen_id }} {
+    position: relative;
+    z-index: 2;
+    max-width: 100%;
+  }
+
+  .ai-black-friday-banner__text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_size }}px;
+    font-weight: {{ block.settings.font_weight }};
+    margin: 0;
+    letter-spacing: {{ block.settings.letter_spacing }}px;
+  }
+
+  .ai-black-friday-banner__code-{{ ai_gen_id }} {
+    display: inline-block;
+    background-color: {{ block.settings.code_background }};
+    color: {{ block.settings.code_text_color }};
+    padding: {{ block.settings.code_padding_vertical }}px {{ block.settings.code_padding_horizontal }}px;
+    border-radius: {{ block.settings.code_border_radius }}px;
+    font-weight: {{ block.settings.code_font_weight }};
+    margin: 0 {{ block.settings.code_spacing }}px;
+    border: {{ block.settings.code_border_width }}px solid {{ block.settings.code_border_color }};
+    font-family: monospace;
+    letter-spacing: {{ block.settings.code_letter_spacing }}px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-black-friday-banner__text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_size | times: 0.8 }}px;
+    }
+
+    .ai-black-friday-banner-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding_vertical | times: 0.8 }}px {{ block.settings.padding_horizontal | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<div
+  class="ai-black-friday-banner-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-black-friday-banner__content-{{ ai_gen_id }}">
+    <p class="ai-black-friday-banner__text-{{ ai_gen_id }}">
+      {% if block.settings.text_before != blank %}
+        {{ block.settings.text_before }}
+      {% endif %}
+      {% if block.settings.show_code and block.settings.promo_code != blank %}
+        <span class="ai-black-friday-banner__code-{{ ai_gen_id }}">{{ block.settings.promo_code }}</span>
+      {% endif %}
+      {% if block.settings.text_after != blank %}
+        {{ block.settings.text_after }}
+      {% endif %}
+    </p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Black Friday banner",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "text_before",
+      "label": "Text before code",
+      "default": "BLACK FRIDAY SALE: USE CODE"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_code",
+      "label": "Show promo code",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "promo_code",
+      "label": "Promo code",
+      "default": "TDHDTC"
+    },
+    {
+      "type": "text",
+      "id": "text_after",
+      "label": "Text after code",
+      "default": "FOR 15% OFF"
+    },
+    {
+      "type": "header",
+      "content": "Banner style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Text style"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "letter_spacing",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Letter spacing",
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Code style"
+    },
+    {
+      "type": "color",
+      "id": "code_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "code_text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "code_border_color",
+      "label": "Border",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "code_border_width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "code_padding_vertical",
+      "min": 2,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "code_padding_horizontal",
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "code_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "code_font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "code_letter_spacing",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Letter spacing",
+      "default": 1.5
+    },
+    {
+      "type": "range",
+      "id": "code_spacing",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Spacing around code",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Black Friday banner"
+    }
+  ]
+}
+{% endschema %}
