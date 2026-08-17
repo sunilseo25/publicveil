@@ -1,3 +1,16 @@
+<script type="load">
+    document.addEventListener('DOMContentLoaded', function () {
+        var videos = document.querySelectorAll('video.lazyvideo');
+        if(videos){
+            videos.forEach(function (video) {
+                video.removeAttribute('preload');
+                video.setAttribute('autoplay', true);
+                video.muted = true;
+                video.play();
+            });
+        }
+    });
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const startinterval = setInterval(() => {

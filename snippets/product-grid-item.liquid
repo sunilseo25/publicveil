@@ -99,7 +99,7 @@
               {% unless settings.product_grid_image_fill %} grid__image-contain{% endunless %} image-style--{{ image_style }}
             {%- endcapture -%}
             {%- if preview_image != blank -%}
-              {%- render 'image-element',
+              {%- render 'lazy-image-element',
                 img: preview_image,
                 classes: image_classes,
                 sizes: sizes,

@@ -31,6 +31,7 @@
           id="ProductPhotos-{{ section_id }}"
         >
           {%- for media in product.media -%}
+            {% if forloop.first %}
             {%- render 'media',
               section_id: section_id,
               media: media,
@@ -48,6 +49,25 @@
               fallback: fallback,
               loading: loading,
             -%}
+            {% else %}
+              {%- render 'lazy-media',
+              section_id: section_id,
+              media: media,
+              featured_media: featured_media,
+              loopIndex0: forloop.index0,
+              loopIndex: forloop.index,
+              product_zoom_enable: product_zoom_enable,
+              product_zoom_size: product_zoom_size,
+              product_image_size: product_image_size,
+              isModal: isModal,
+              video_looping: video_looping,
+              video_style: video_style,
+              sizes: sizes,
+              sizeVariable: sizeVariable,
+              fallback: fallback,
+              loading: loading,
+            -%}
+            {% endif %}
           {%- endfor -%}
         </div>
 
@@ -132,7 +152,7 @@
                     {%- endcapture -%}
                     {%- assign media_image_alt = media.alt | escape | split: '#' | first -%}
 
-                    {%- render 'image-element',
+                    {%- render 'lazy-image-element',
                       img: media.preview_image,
                       alt: media_image_alt,
                       widths: '100, 360, 540',

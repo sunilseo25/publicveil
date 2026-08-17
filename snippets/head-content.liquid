@@ -17,8 +17,8 @@
 			e[o]((e) => {
 			if (
 				"SCRIPT" === e[d] &&
-				("web-pixels-manager-setup" === e.id ||
-				e.innerHTML.includes('!window.ga') ||
+				("web-pixels-manager-setup" === e.id || e.innerHTML.includes('TriplePixel') || (e.innerHTML.includes('wpmLoader') || e.innerHTML.includes('alia') && i) ||
+				e.innerHTML.includes('wpmLoader') || e.src.includes('web-components') || e.src.includes('klaviyo') || e.src.includes('gdpr-backpack-') || e.src.includes('restock-sdk-loader') || e.src.includes('echo-all-in-one-fixed-bundles-') || e.src.includes('cdn-sf.vitals') ||
 				e.src.includes('preorder-notify-me') ||
 				e.src.includes('yotpo'))  &&
 				1 === e.nodeType
@@ -42,7 +42,11 @@
 	}
 	})();	
 </script>
-<style id="xbgl">div:not(.xbg), section:not(.xbg), ifz:not(.xbg){background-image:none !important;}</style>
+<style id="xbgl">div:not(.xbg), section:not(.xbg), ifz:not(.xbg){background-image:none !important;}
+	html:not(.mainopt):not(.xh), html:not(.mainopt):not(.xh) * {
+        font-family: unset !important;
+    }
+</style>
 <!----header code---->
 <script>
 	var xllbp = 200,
